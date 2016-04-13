@@ -6,7 +6,7 @@
     "es6": true
   },
   "rules": {
-    "strict": [1, "never"],
+    "strict": [1, "always"],
     "quotes": [2, "single"],
     "semi": [2, "always"],
     "eqeqeq": [2, "smart"],
