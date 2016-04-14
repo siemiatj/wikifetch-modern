@@ -3,9 +3,11 @@
 import * as cheerio from 'cheerio';
 import request from 'request-promise';
 
-export default class Wikifetch {
-  constructor() {
+export class Wikifetch {
+  constructor(articleName) {
     this.wikiPrefix = 'http://en.wikipedia.org/wiki/';
+    this.articleName = articleName;
+    this.fetchedArticle = {};
   }
 
   fetch(articleName) {
@@ -39,4 +41,16 @@ export default class Wikifetch {
   parseLinks() {}
 
   parseSections(){}
+}
+
+export default wikifetch(articleName) {
+  let newWikiFetch = new WikiFetch(articleName);
+
+  newWikiFetch.fetch()
+  .then(function() {
+    return newWikiFetch.fetchedArticle;
+  })
+  .catch(function() {
+    console.log('error');
+  });
 }
