@@ -9,7 +9,7 @@ export default class Wikifetch {
   }
 
   fetch(articleName) {
-    return this.getArticle(articleName);
+    this.getArticle(articleName);
   }
 
   getArticle(articleName) {
@@ -20,14 +20,23 @@ export default class Wikifetch {
         return cheerio.load(body);
       }
     };
+    let {parseTitle} = this;
     
     request(options)
       .then($ => {
-        console.log($);
+        parseTitle($);
       })
       .catch(err => {
         console.log(err);
       });
   }
-}
 
+  parseTitle(ch) {
+    let title = ch('#firstHeading').text();
+    console.log('TITLE: ', title);
+  }
+
+  parseLinks() {}
+
+  parseSections(){}
+}
