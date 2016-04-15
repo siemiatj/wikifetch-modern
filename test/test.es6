@@ -1,3 +1,9 @@
 import wikifetch from '../dist/wikifetch';
 
-console.log('WIKIFETCH !! ', wikifetch('Polska')); 
+wikifetch('Polska')
+.then((article) => {
+  console.log('ARTICLE: ', article);
+})
+.catch((error) => {
+  console.log('ERROR');
+});

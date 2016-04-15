@@ -120,6 +120,7 @@ class Wikifetch {
   }
 }
 
+// this must return a promise
 export default function wikifetch(articleName) {
   let newWikiFetch = new Wikifetch(articleName);
 
