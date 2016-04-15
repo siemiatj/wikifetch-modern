@@ -1,5 +1,3 @@
-import Wikifetch from '../dist/wikifetch';
+import wikifetch from '../dist/wikifetch';
 
-let WF = new Wikifetch();
-
-console.log('WIKIFETCH !! ', WF.fetch('Polska')); 
+console.log('WIKIFETCH !! ', wikifetch('Polska')); 
