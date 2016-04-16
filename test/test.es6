@@ -5,5 +5,5 @@ wikifetch('Polska')
   console.log('ARTICLE: ', article);
 })
 .catch((error) => {
-  console.log('ERROR');
+  console.log('ERROR: ', error);
 });
