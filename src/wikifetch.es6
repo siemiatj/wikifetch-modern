@@ -21,105 +21,87 @@ class Wikifetch {
       }
     };
 
-    console.log('FETCHED1: ', fetchedArticle);
-    
     return new Bluebird(function (resolve, reject) {
       request(options)
         .then($ => {
-          parseTitle($);
-          parseLinks($);
-          parseSections($);
+          parseTitle($, fetchedArticle);
+          parseLinks($, fetchedArticle);
+          parseSections($, fetchedArticle);
 
-          console.log('FETCHED10: ', fetchedArticle);
-
-          resolve(5);
+          resolve(fetchedArticle);
         })
         .catch(err => {
           //handle error
-          console.log(err);
-          reject(null);
+          reject(err);
         });
 
     });
   }
 
-  parseTitle(ch) {
+  parseTitle(ch, fe) {
     let title = ch('#firstHeading').text();
-
-    console.log('FETCHED2: ', this)
-
-    // this.fetchedArticle.title = title;
-    // return;
+    fe.title = title;
   }
 
-  parseLinks(ch) {
-    // this.fetchedArticle.links = {};
-    // parsedArticle.links = {};
+  parseLinks(ch, fe) {
+    fe.links = {};
 
-    // console.log('FETCHED3: ', this.fetchedArticle)
-    console.log('FETCHED3');
+    console.log('FETCHED3 ', cheerio);
+    console.log('CH: ', ch);
 
-    // ch('#bodyContent p a').each(() => {
-    //   let element = cheerio(this),
-    //     href = element.attr('href'),
-    //     entityName = href.replace('/wiki/', '');
+    ch('#bodyContent p a').each(() => {
+      let element = ch(this),
+        href = element.attr('href'),
+        entityName = href.replace('/wiki/', '');
 
-    //   // Only extract article links.
-    //   if ( href.indexOf('/wiki/') < 0 ) return;
+      // Only extract article links.
+      if ( href.indexOf('/wiki/') < 0 ) return;
 
-    //   // Create or update the link lookup table.
-    //   if ( this.fetchedArticle.links[entityName] ) {
-    //     this.fetchedArticle.links[entityName].occurrences++;
-    //   } else {
-    //     this.fetchedArticle.links[href.replace('/wiki/', '')] = {
-    //       title: element.attr('title'),
-    //       occurrences: 1,
-    //       text: element.text()
-    //     };
-    //   }
+      // Create or update the link lookup table.
+      if (fe.links[entityName]) {
+        fe.links[entityName].occurrences++;
+      } else {
+        fe.links[href.replace('/wiki/', '')] = {
+          title: element.attr('title'),
+          occurrences: 1,
+          text: element.text()
+        };
+      }
 
-    //   // Replace the element in the page with a reference to the link.
-    //   element.replaceWith('[[' + entityName + ']]');
-    // });
-
-    // return;
+      // Replace the element in the page with a reference to the link.
+      element.replaceWith('[[' + entityName + ']]');
+    });
   }
 
-  parseSections(ch){
-    console.log('FETCHED4');
-    // console.log('FETCHED4: ', this.fetchedArticle);
+  parseSections(ch, fe){
+    let currentHeadline = fe.title;
+    fe.sections = {};
 
-    // let currentHeadline = this.fetchedArticle.title;
+    ch('#bodyContent p,h2,h3,img').each(function() {
+      let element = ch(this);
 
-    // this.fetchedArticle.sections = {};
+      // Load new headlines as we observe them.
+      if (element.is('h2') || element.is('h3')) {
+        currentHeadline = element.text().trim();
+        return;
+      }
 
-    // ch('#bodyContent p,h2,h3,img').each(function() {
-    //   let element = cheerio(this);
+      // Initialize the object for this section.
+      if (!fe.sections[currentHeadline]) {
+        fe.sections[currentHeadline] = {
+          text: '',
+          images: []
+        };
+      }
 
-    //   // Load new headlines as we observe them.
-    //   if (element.is('h2') || element.is('h3')) {
-    //     currentHeadline = element.text().trim();
-    //     return;
-    //   }
+      // Grab images from the section don't grab spammy ones.
+      if (element.is('img') && element.attr('width') > 50) {
+        fe.sections[currentHeadline].images.push( element.attr('src').replace('//', 'http://') );
+        return;
+      }
 
-    //   // Initialize the object for this section.
-    //   if (!this.fetchedArticle.sections[currentHeadline]) {
-    //     this.fetchedArticle.sections[currentHeadline] = {
-    //       text: '',
-    //       images: []
-    //     };
-    //   }
-
-    //   // Grab images from the section don't grab spammy ones.
-    //   if (element.is('img') && element.attr('width') > 50) {
-    //     this.fetchedArticle.sections[currentHeadline].images.push( element.attr('src').replace('//', 'http://') );
-    //     return;
-    //   }
-
-    //   this.fetchedArticle.sections[currentHeadline].text += element.text();
-    // });
-
-    // return;
+      fe.sections[currentHeadline].text += element.text();
+    });
   }
 }
 
