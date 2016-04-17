@@ -13,14 +13,14 @@ class Wikifetch {
   }
 
   fetch(){
-    let {parseTitle, parseLinks, parseSections, fetchedArticle, articleName, wikiPrefix} = this;
-    let articleURI = wikiPrefix + articleName;
-    let options = {
-      uri: articleURI,
-      transform: body => {
-        return cheerio.load(body);
-      }
-    };
+    let {parseTitle, parseLinks, parseSections, fetchedArticle, articleName, wikiPrefix} = this,
+      articleURI = wikiPrefix + articleName,
+      options = {
+        uri: articleURI,
+        transform: body => {
+          return cheerio.load(body);
+        }
+      };
 
     return new Bluebird(function (resolve, reject) {
       request(options)
@@ -32,7 +32,6 @@ class Wikifetch {
           resolve(fetchedArticle);
         })
         .catch(err => {
-          //handle error
           reject(err);
         });
 
@@ -50,16 +49,16 @@ class Wikifetch {
     ch('#bodyContent p a').each((idx, el) => {
       let element = new Cheerio(el),
         href = element.attr('href'),
-        entityName = href.replace('/wiki/', '');
+        entityName = href.replace(/\/wiki\//g, '');
 
       // Only extract article links.
-      if ( href.indexOf('/wiki/') < 0 ) return;
+      if (!href.match(/\/wiki\//g)) return;
 
       // Create or update the link lookup table.
       if (fe.links[entityName]) {
         fe.links[entityName].occurrences++;
       } else {
-        fe.links[href.replace('/wiki/', '')] = {
+        fe.links[href.replace(/\/wiki\//g, '')] = {
           title: element.attr('title'),
           occurrences: 1,
           text: element.text()
