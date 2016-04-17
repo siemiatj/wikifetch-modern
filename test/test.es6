@@ -1,6 +1,6 @@
 import wikifetch from '../dist/wikifetch';
 
-wikifetch('Polska')
+wikifetch('javascript')
 .then((article) => {
   console.log('ARTICLE: ', article);
 })
