@@ -1,7 +1,7 @@
 {
   "name": "wikifetch-modern",
   "main": "dist/wikifetch.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Jakub Siemiatkowski <kuba@virtualdesign.pl>",
   "engines": [
     "node"
@@ -16,7 +16,7 @@
   "dependencies": {
     "cheerio": "0.20.0",
     "request-promise": "2.0.1",
-    "bluebird": "3.3.5",
+    "bluebird": "3.3.5"
   },
   "devDependencies": {
     "babel": "6.3.26",

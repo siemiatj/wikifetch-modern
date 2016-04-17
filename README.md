@@ -48,9 +48,10 @@ npm install wikifetch-modern
 ```
 
 
-Use `wikifetch-modern` in your code. Calling `wikipetch` returns a Promise :
+Use `wikifetch-modern` in your code. Calling `wikifetch` returns a Promise :
 ```
-import wikifetch from 'wikifetch';
+import wikifetch from 'wikifetch-modern';
+// or var wikifetch = require('wikifetch-modern').default;
 
 wikifetch('javascript')
 .then((article) => {
