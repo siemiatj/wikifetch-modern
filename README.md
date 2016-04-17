@@ -1,23 +1,23 @@
-WikiFetch
+Modern Wikifetch
 =========
 
-Author: [@benjamincoe](https://twitter.com/#/benjamincoe)
+Author: [@sasklacz](https://twitter.com/#/sasklacz)
 
-Problem
--------
+Based on:
+[WikiFetch](https://github.com/bcoe/wikifetch)
 
-For some NLP research I'm currently doing, I was interested in parsing structured information from Wikipedia articles.
+Why
+----
 
-I did not want to use a full-featured MediaWiki parser:
+For one of my projects I needed a list of related links from a wiki article including text exerpt and an image.
+This is a small experiment based on @bcoe's npm module which I rewrote to ES6. 
 
-* this would be heavy-handed, all I really wanted was: the text contents from articles, images, and links to other articles.
-* I wanted to be able to extend the approach to other websites, e.g., news sites.
-* I wanted to use a crawler-based approach, rather than downloading a massive dataset.
+What
+----
 
-The Solution
-------------
+This small module will get you a json formatted data of a wikipedia article including links and images. 
 
-WikiFetch Crawls a Wikipedia article using Node.js and jQuery. It returns a structured JSON-representation of the page:
+Sample data returned by this code :
 
 ```javscript
 	{
@@ -38,12 +38,22 @@ WikiFetch Crawls a Wikipedia article using Node.js and jQuery. It returns a stru
 	}
 ```
 
-* Links within sections are replaced with [[article name]], which will have a corresponding entry in **links**.
-
 Usage
 -----
 
+Install `npm` module:
+
 ```bash
-npm install wikifetch -g
-wikifetch --article=Dog
+npm install wikifetch-modern
+```
+
+
+Use `wikifetch-modern` in your code. Calling `wikipetch` returns a Promise :
+```
+import wikifetch from 'wikifetch';
+
+wikifetch('javascript')
+.then((article) => {
+  console.log('JSON ARTICLE: ', article);
+})
 ```
