@@ -1,5 +1,5 @@
 Modern Wikifetch
-=========
+================
 
 Author: [@sasklacz](https://twitter.com/#/sasklacz)
 
@@ -58,3 +58,13 @@ wikifetch('javascript')
   console.log('JSON ARTICLE: ', article);
 })
 ```
+
+Building
+--------
+
+To build the project run
+
+```bash
+gulp
+```
+
