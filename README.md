@@ -1,23 +1,21 @@
-Modern Wikifetch
-================
+What
+----
 
-Author: [@sasklacz](https://twitter.com/#/sasklacz)
+Wikipedia scrapper that returns a JSON-formatted object of all the links and images in a wiki article.
 
-Based on:
-[WikiFetch](https://github.com/bcoe/wikifetch)
 
 Why
 ----
 
 For one of my projects I needed a list of related links from a wiki article including text exerpt and an image.
-This is a small experiment based on @bcoe's npm module which I rewrote to ES6. 
+This is a small experiment based on @bcoe's npm module which I rewrote to ES6, Promises and it's now usable outside of terminal. 
 
-What
+
+How
 ----
 
-This small module will get you a json formatted data of a wikipedia article including links and images. 
-
-Sample data returned by this code :
+Based on `cheerio` for parsing the HTML, `request-promise` for getting data and `Bluebird` for promises.
+Sample data returned by this module :
 
 ```javscript
 	{
@@ -38,6 +36,7 @@ Sample data returned by this code :
 	}
 ```
 
+
 Usage
 -----
 
@@ -54,10 +53,14 @@ import wikifetch from 'wikifetch-modern';
 // or var wikifetch = require('wikifetch-modern').default;
 
 wikifetch('javascript')
-.then((article) => {
+.then(article => {
   console.log('JSON ARTICLE: ', article);
 })
+.catch(err => {
+  // handle error
+});;
 ```
+
 
 Building
 --------
@@ -68,3 +71,9 @@ To build the project run
 gulp
 ```
 
+
+Credits
+-------
+
+Based on:
+[WikiFetch](https://github.com/bcoe/wikifetch)
