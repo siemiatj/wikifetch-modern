@@ -1,6 +1,7 @@
 'use strict';
 
 import * as cheerio from 'cheerio';
+import Cheerio from 'cheerio';
 import Bluebird from 'bluebird';
 import request from 'request-promise';
 
@@ -46,11 +47,8 @@ class Wikifetch {
   parseLinks(ch, fe) {
     fe.links = {};
 
-    console.log('FETCHED3 ', cheerio);
-    console.log('CH: ', ch);
-
-    ch('#bodyContent p a').each(() => {
-      let element = ch(this),
+    ch('#bodyContent p a').each((idx, el) => {
+      let element = new Cheerio(el),
         href = element.attr('href'),
         entityName = href.replace('/wiki/', '');
 
@@ -77,8 +75,8 @@ class Wikifetch {
     let currentHeadline = fe.title;
     fe.sections = {};
 
-    ch('#bodyContent p,h2,h3,img').each(function() {
-      let element = ch(this);
+    ch('#bodyContent p,h2,h3,img').each((idx, el) => {
+      let element = new Cheerio(el);
 
       // Load new headlines as we observe them.
       if (element.is('h2') || element.is('h3')) {
