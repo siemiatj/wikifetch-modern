@@ -1,18 +1,15 @@
-What
-----
+## What
 
 Wikipedia scrapper that returns a JSON-formatted object of all the links and images in a wiki article.
 
 
-Why
-----
+## Why
 
 For one of my projects I needed a list of related links from a wiki article including text exerpt and an image.
 This is a small experiment based on @bcoe's npm module which I rewrote to ES6, Promises and it's now usable outside of terminal. 
 
 
-How
-----
+## How
 
 Based on `cheerio` for parsing the HTML, `request-promise` for getting data and `Bluebird` for promises.
 Sample data returned by this module :
@@ -37,8 +34,7 @@ Sample data returned by this module :
 ```
 
 
-Usage
------
+## Usage
 
 Install `npm` module:
 
@@ -62,8 +58,7 @@ wikifetch('javascript')
 ```
 
 
-Building
---------
+## Building
 
 To build the project run
 
@@ -72,8 +67,7 @@ gulp
 ```
 
 
-Credits
--------
+## Credits
 
 Based on:
 [WikiFetch](https://github.com/bcoe/wikifetch)
