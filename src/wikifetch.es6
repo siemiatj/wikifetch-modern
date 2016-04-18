@@ -1,5 +1,3 @@
-'use strict';
-
 import * as cheerio from 'cheerio';
 import Cheerio from 'cheerio';
 import Bluebird from 'bluebird';
@@ -13,7 +11,7 @@ class Wikifetch {
   }
 
   fetch(){
-    let {parseTitle, parseLinks, parseSections, fetchedArticle, articleName, wikiPrefix} = this,
+    let { parseTitle, parseLinks, parseSections, fetchedArticle, articleName, wikiPrefix } = this,
       articleURI = wikiPrefix + articleName,
       options = {
         uri: articleURI,
