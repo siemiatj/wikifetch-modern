@@ -30,6 +30,8 @@
     "babel-eslint": "6.0.2",
     "gulp-eslint": "2.0.0",
     "run-sequence": "1.1.5",
-    "del": "2.2.0"
+    "del": "2.2.0",
+    "mocha": "2.4.5",
+    "chai": "3.5.0"
   }
 }
