@@ -60,10 +60,28 @@ wikifetch('javascript')
 
 ## Building
 
-To build the project run
+To build the project run:
 
 ```bash
-gulp
+npm install && gulp
+```
+
+
+## Testing
+
+To test the project run:
+
+```bash
+gulp test
+```
+
+
+## Development
+
+Easiest way to develop is to run the watcher :
+
+```bash
+gulp watch
 ```
 
 
