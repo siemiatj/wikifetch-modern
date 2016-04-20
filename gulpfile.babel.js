@@ -3,6 +3,7 @@ import babel from 'gulp-babel';
 import del from 'del';
 import runSequence from 'run-sequence';
 import gulpEslint from 'gulp-eslint';
+import mocha from 'gulp-mocha';
 
 var config = {
   paths: {
@@ -13,6 +14,9 @@ var config = {
     test: {
       src: 'test/**/*.es6',
       dist: 'test-dist/'
+    },
+    tmpTest: {
+      src: 'test-dist/person-test.js'
     }
   }
 };
@@ -47,7 +51,13 @@ gulp.task('watch', () => {
   gulp.watch(config.paths.test.src, ['babel-test']);
 });
 
+gulp.task('test', ['babel'], () =>
+  gulp.src([config.paths.tmpTest.src])
+    .pipe(mocha({ reporter: 'spec' }))
+    .on('error', err => console.log(err.stack))
+);
+
 // Default Task
 gulp.task('default', () =>
-  runSequence('clean', ['babel'])
+  runSequence('clean', ['babel', 'test'])
 );
