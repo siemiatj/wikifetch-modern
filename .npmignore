@@ -1,5 +1,5 @@
 bin
-test
 test-dist
 node-modules
 npm-debug.log
+example
