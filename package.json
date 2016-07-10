@@ -1,7 +1,7 @@
 {
   "name": "wikifetch-modern",
   "main": "dist/wikifetch.js",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "author": "Jakub Siemiatkowski <kuba@saskla.cz>",
   "engines": [
     "node"
