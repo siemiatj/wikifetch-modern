@@ -2,7 +2,7 @@
   "name": "wikifetch-modern",
   "main": "dist/wikifetch.js",
   "version": "0.0.7",
-  "author": "Jakub Siemiatkowski <kuba@virtualdesign.pl>",
+  "author": "Jakub Siemiatkowski <kuba@saskla.cz>",
   "engines": [
     "node"
   ],

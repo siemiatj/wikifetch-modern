@@ -54,7 +54,7 @@ wikifetch('javascript')
 })
 .catch(err => {
   // handle error
-});;
+});
 ```
 
 
