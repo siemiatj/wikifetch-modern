@@ -1,13 +1,13 @@
 {
   "name": "wikifetch-modern",
   "main": "dist/wikifetch.js",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "author": "Jakub Siemiatkowski <kuba@saskla.cz>",
   "engines": [
     "node"
   ],
   "license": "MIT",
-  "description": "",
+  "description": "Wikipedia articles crawler",
   "keywords": [
     "wikipedia",
     "wiki",
