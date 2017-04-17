@@ -4,8 +4,8 @@ import Bluebird from 'bluebird';
 import request from 'request-promise';
 
 class Wikifetch {
-  constructor(articleName) {
-    this.wikiPrefix = 'http://en.wikipedia.org/wiki/';
+  constructor(articleName, wikiPrefix) {
+    this.wikiPrefix = wikiPrefix;
     this.articleName = articleName;
     this.fetchedArticle = {};
   }
@@ -101,8 +101,8 @@ class Wikifetch {
 }
 
 // this must return a promise
-export default function wikifetch(articleName) {
-  let newWikiFetch = new Wikifetch(articleName);
+export default function wikifetch(articleName, wikiPrefix='http://en.wikipedia.org/wiki/') {
+  let newWikiFetch = new Wikifetch(articleName, wikiPrefix);
 
   return newWikiFetch.fetch();
 }
