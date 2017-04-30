@@ -16,7 +16,7 @@ var config = {
       dist: 'test-dist/'
     },
     tmpTest: {
-      src: 'test-dist/person-test.js'
+      src: 'test-dist/unit.js'
     }
   }
 };
